@@ -1,8 +1,7 @@
 
 
-import json, base64, sys ,os ,time ,ast
-import win32api, win32gui, win32con, pyWinhook
-from random import randint as rd
+import sys ,os ,time ,ast
+import win32api, win32con, pyWinhook
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import *
 from PySide6.QtGui import *
