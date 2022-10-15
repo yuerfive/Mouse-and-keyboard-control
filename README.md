@@ -12,6 +12,4 @@
 
 b站演示链接:<a href="https://www.bilibili.com/video/BV1VY4y1w7gC">点这里观看</a>
 
-界面UI部分参考:https://github.com/lyswhut/lx-music-desktop#readme
-
 **声明:本软件仅供学习交流使用。**
