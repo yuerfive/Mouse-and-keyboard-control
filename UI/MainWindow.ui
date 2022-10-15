@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1200</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>听雨按键辅助</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font-family:楷体;
+	color:white;
+}
+
+QLabel#label_6{
+    background-color:#2d3445;
+}
+QLabel#label_7{
+    background-color:#181D25;
+}
+QLabel#label_8{
+    background-color:#181D25;
+}
+QLabel#label_11{
+	font-size:24pt;
+	color:red;
+    background-color:#181D25,50%;
+}
+
+QLabel#label_9
+{
+    font-size:12pt;
+    /*背景颜色*/  
+    background-color:#181D25;
+}
+QLabel#label_10
+{
+    font-size:12pt;
+    /*背景颜色*/  
+	background-color:#181D25;
+}
+
+QWidget { 
+background-color: #1F2430;
+border-radius: 0px;
+}
+
+QLabel#label_4 { 
+background-color: qlineargradient(spread:pad, x1:0.114, y1:0.131, x2:0.869, y2:0.869318, stop:0 rgba(241, 151, 240, 255), stop:1 rgba(184, 247, 245, 255));
+border-radius: 10px;
+}
+
+QLabel#label_5 { 
+background-color: #181D25;
+border-radius: 3px;
+
+}
+
+QLabel { 
+background-color: #2f3648;
+border-radius: 0px;
+}
+
+QLineEdit
+{
+    font-size:12pt;
+    /*背景颜色*/  
+    background-color:#181D25;
+}
+
+QPushButton#Button1
+{
+	border-radius:3px;
+}
+QPushButton#Button2
+{
+	border-radius:3px;
+}
+QPushButton#Button3
+{
+	border-radius:3px;
+}
+
+
+/*按钮普通态*/
+QPushButton
+{
+    font-size:14pt;
+    /*背景颜色*/  
+    background-color:#29303f;
+    /*边框圆角半径*/ 
+    border-radius:5px;
+}
+ 
+/*按钮停留态*/
+QPushButton:hover
+{
+    /*背景颜色*/  
+    background-color:#363A45;
+}
+ 
+/*按钮按下态*/
+QPushButton:pressed
+{
+    /*背景颜色*/  
+    background-color:#000000;
+    /*左内边距为3像素，让按下时字向右移动3像素*/  
+    padding-left:1px;
+    /*上内边距为3像素，让按下时字向下移动3像素*/  
+    padding-top:1px;
+}
+
+
+/*滑块原始状态*/
+QScrollBar::handle:vertical
+{
+    background:#404755;  
+}
+
+/*滑块光标经过状态*/
+QScrollBar::handle:vertical:hover 
+{
+    background-color:#4F5767;
+}
+
+
+/*滑块已经经过的滑轨区域的颜色*/
+QScrollBar::add-page:vertical
+{
+    background:#2F3648;
+}
+
+/*滑块还没经过的滑轨区域的颜色*/
+QScrollBar::sub-page:vertical
+{
+    background:#2F3648; 
+}
+
+
+</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>181</width>
+     <height>700</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="plainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>363</x>
+     <y>35</y>
+     <width>831</width>
+     <height>621</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPlainTextEdit
+{
+    font-size:14pt;
+	selection-background-color:#2A3546
+}
+</string>
+   </property>
+   <property name="tabChangesFocus">
+    <bool>false</bool>
+   </property>
+   <property name="readOnly">
+    <bool>false</bool>
+   </property>
+   <property name="plainText">
+    <string/>
+   </property>
+   <property name="tabStopDistance">
+    <double>40.000000000000000</double>
+   </property>
+   <property name="cursorWidth">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>40</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_2{
+
+    font-size:16pt;
+    /*背景颜色*/  
+    background-color:#181D25;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>项目文件</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>130</y>
+     <width>171</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget#listWidget{
+
+    font-size:12pt;
+    /*背景颜色*/  
+    background-color:#181D25;
+	/*不显示虚线*/
+	outline:0px;
+}
+
+/*原始状态*/
+QListWidget::item{
+	/*上下宽度*/
+	padding-top:4px;
+	padding-bottom:4px;
+	/*间隔*/
+	margin-top:1px;
+	margin-bottom:1px;
+	background-color:#1e2537;
+	border-radius:3px;
+}
+
+/*悬停状态*/
+QListWidget::item:hover{
+	background-color:#292e3a;
+}
+
+/*选中状态*/
+QListWidget::item:selected
+{
+    background-color:#000000;
+}
+
+/*失去焦点状态*/
+QListWidget::item:selected:!active
+{
+border-width:0px; 
+background:#000000;
+color:white;
+ }
+
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>176</x>
+     <y>0</y>
+     <width>179</width>
+     <height>701</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_3{
+
+    /*背景颜色*/  
+    background-color:#181D25;
+
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit1">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>666</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit2">
+   <property name="geometry">
+    <rect>
+     <x>900</x>
+     <y>666</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Button1">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>666</y>
+     <width>60</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>启动</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Button2">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>666</y>
+     <width>60</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>停止</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>30</y>
+     <width>60</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>UI/logo_ui.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>120</y>
+     <width>176</width>
+     <height>581</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget#listWidget_2{
+
+    font-size:14pt;
+    /*背景颜色*/  
+    background-color:#2F3648;
+	/*不显示虚线*/
+	outline:0px;
+}
+
+/*原始状态*/
+QListWidget::item{
+	/*上下宽度*/
+	padding-top:10px;
+	padding-bottom:10px;
+	/*间隔*/
+	margin-top:5px;
+	margin-bottom:5px;
+	margin-left:20px;
+	margin-right:20px;
+	background-color:#1e2537;
+	border-radius:5px;
+}
+
+/*悬停状态*/
+QListWidget::item:hover{
+	background-color:#181D25;
+}
+
+/*选中状态*/
+QListWidget::item:selected
+{
+    background-color:#000000;
+}
+
+/*失去焦点状态*/
+QListWidget::item:selected:!active
+{
+border-width:0px; 
+background:#000000;
+color:white;
+ }
+
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>键盘控制</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>鼠标控制</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>后台控制</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>364</x>
+     <y>5</y>
+     <width>180</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_5{
+
+    font-size:12pt;
+    /*字体颜色为白色*/    
+    color:white;
+
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Button3">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>5</y>
+     <width>23</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/*按钮普通态*/
+QPushButton#Button3
+{
+    font-size:14pt;
+    /*背景颜色*/  
+	background: transparent;
+    /*background-color:#181D25;*/
+    /*边框圆角半径*/ 
+    border-radius:5px;
+}
+ 
+/*按钮停留态*/
+QPushButton#Button3:hover
+{
+    /*背景颜色*/  
+    background-color:#363A45;
+}
+ 
+/*按钮按下态*/
+QPushButton#Button3:pressed
+{
+    /*背景颜色*/  
+    background-color:#000000;
+    /*左内边距为3像素，让按下时字向右移动3像素*/  
+    padding-left:1px;
+    /*上内边距为3像素，让按下时字向下移动3像素*/  
+    padding-top:1px;
+}</string>
+   </property>
+   <property name="text">
+    <string>X</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>184</x>
+     <y>106</y>
+     <width>163</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>366</x>
+     <y>33</y>
+     <width>831</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>366</x>
+     <y>656</y>
+     <width>831</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>363</x>
+     <y>666</y>
+     <width>74</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_2{
+
+    font-size:16pt;
+    /*背景颜色*/  
+    background-color:#181D25;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>鼠标位置:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit3">
+   <property name="geometry">
+    <rect>
+     <x>437</x>
+     <y>666</y>
+     <width>100</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>600</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_10{
+
+    font-size:12pt;
+    /*背景颜色*/  
+    background-color:#2F3648;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>v1.3.0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>260</y>
+     <width>301</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>35</x>
+     <y>637</y>
+     <width>110</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_12{
+
+    font-size:12pt;
+    /*背景颜色*/  
+    background-color:#2F3648;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>Q群：212769521</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>label_3</zorder>
+  <zorder>plainTextEdit</zorder>
+  <zorder>label_2</zorder>
+  <zorder>listWidget</zorder>
+  <zorder>lineEdit1</zorder>
+  <zorder>lineEdit2</zorder>
+  <zorder>Button1</zorder>
+  <zorder>Button2</zorder>
+  <zorder>label_4</zorder>
+  <zorder>listWidget_2</zorder>
+  <zorder>label_5</zorder>
+  <zorder>Button3</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_9</zorder>
+  <zorder>lineEdit3</zorder>
+  <zorder>label_10</zorder>
+  <zorder>label_11</zorder>
+  <zorder>label_12</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
