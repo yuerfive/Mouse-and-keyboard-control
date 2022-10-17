@@ -155,9 +155,6 @@ class Main_Window(QWidget):
         # 读取UI文件
         self.ui = QUiLoader().load(Main_ui)
 
-        # 防盗验证
-        self.guard() 
-
         # 设置文本编辑框为只读
         self.ui.plainTextEdit.setReadOnly(True)
         # 设置X按钮为隐藏
@@ -237,51 +234,27 @@ class Main_Window(QWidget):
         time.sleep(3)
         self.ui.label_11.hide()
 
+        # 加载 启动停止快捷键
+        # def Shortcut_key(self):
+        #     global start_key ,Stop_key
+        #     with open(r'config\original\Shortcut_key.txt') as f:
+        #         data_key = f.read()
+        #         dict_key = ast.literal_eval(data_key)
+        #         start_key = dict_key['start']
+        #         Stop_key = dict_key['Stop']
+        #         self.set_startandStop_shortcut()
 
-    # 防盗验证
-    def guard(self) :
-        data_guards = '''1、作者：【B站 听雨sq】	https://space.bilibili.com/1617626133
+        # def set_startandStop_shortcut(self):
+        #     global start_key ,Stop_key
+        #     if start_key != 0 :
+        #         self.ui.Button1.setShortcut(start_key)
+        #         self.ui.lineEdit1.setText(start_key)
+        #         self.ui.lineEdit1.setReadOnly(True)
 
-2、此软件为免费软件
-
-3、如有人向您出售此软件，那一定是骗子
-
-4、Q群：212769521'''
-        isfile = os.path.isfile(r'【B站 听雨sq】此软件免费.txt')
-        if isfile == True: 
-            with open(r'【B站 听雨sq】此软件免费.txt' ,  'r' , encoding='utf-8') as f :
-                data_guard = f.read()
-                if data_guard == data_guards :
-                    pass
-                else :
-                    QMessageBox.about(self.ui,'警告','您可能被骗了，原创Q群：212769521')
-                    sys.exit(app.exec_(1))
-        else :
-            QMessageBox.about(self.ui,'警告','您可能被骗了，原创Q群：212769521')
-            sys.exit(app.exec_(1))
-
-
-    # 加载 启动停止快捷键
-    # def Shortcut_key(self):
-    #     global start_key ,Stop_key
-    #     with open(r'config\original\Shortcut_key.txt') as f:
-    #         data_key = f.read()
-    #         dict_key = ast.literal_eval(data_key)
-    #         start_key = dict_key['start']
-    #         Stop_key = dict_key['Stop']
-    #         self.set_startandStop_shortcut()
-
-    # def set_startandStop_shortcut(self):
-    #     global start_key ,Stop_key
-    #     if start_key != 0 :
-    #         self.ui.Button1.setShortcut(start_key)
-    #         self.ui.lineEdit1.setText(start_key)
-    #         self.ui.lineEdit1.setReadOnly(True)
-
-    #     if Stop_key != 0 :
-    #         self.ui.Button2.setShortcut(Stop_key)
-    #         self.ui.lineEdit2.setText(Stop_key)
-    #         self.ui.lineEdit2.setReadOnly(True)
+        #     if Stop_key != 0 :
+        #         self.ui.Button2.setShortcut(Stop_key)
+        #         self.ui.lineEdit2.setText(Stop_key)
+        #         self.ui.lineEdit2.setReadOnly(True)
 
 
 #   --------------------------------------------------右键菜单-------------------------------------------------
@@ -953,6 +926,7 @@ class Main_Window(QWidget):
                     coord = i.split(' ')
                     print(coord)
                     pa.click(int(coord[0]),int(coord[1]))
+
         except Exception:
             self.Qlabel_11('数据错误，请检查')
 
@@ -966,6 +940,7 @@ class Main_Window(QWidget):
             pa.moveTo(int(coord1[0]),int(coord1[1]))
             # time.sleep(1)
             pa.dragTo(int(coord2[0]),int(coord2[1]),float(data['用时']))
+
         except Exception:
             self.Qlabel_11('数据错误，请检查')
 
@@ -982,6 +957,7 @@ class Main_Window(QWidget):
                     win32api.keybd_event(key_code[data['连击键']],0,win32con.KEYEVENTF_KEYUP,0)
                 else:
                     break
+
         except Exception:
             self.Qlabel_11('数据错误，请检查')
 
@@ -997,6 +973,7 @@ class Main_Window(QWidget):
                     win32api.keybd_event(key_code[i],0,0,0)
                     time.sleep(0.07)
                     win32api.keybd_event(key_code[i],0,win32con.KEYEVENTF_KEYUP,0)
+                    
         except Exception:
             self.Qlabel_11('数据错误，请检查')
 
@@ -1018,11 +995,48 @@ class Main_Window(QWidget):
                     win32api.keybd_event(key_code[i],0,0,0)
                     time.sleep(0.07)
                     win32api.keybd_event(key_code[i],0,win32con.KEYEVENTF_KEYUP,0)
+
+        except Exception:
+            self.Qlabel_11('数据错误，请检查')
+
+    # 循环
+    def circulate(self,data,circulates):
+        global switch_key
+        try:
+            if circulates == 0 :
+                pass
+            else :
+                instruct = data['宏指令'].split(',')
+                for i in instruct :
+                    if i[0:2] == '延迟' :
+                        delay = i.split(' ')
+                        time.sleep(float(delay[1]))
+                    if i[0:2] == '按下' :
+                        press = i.split(' ') 
+                        win32api.keybd_event(key_code[press[1]],0,0,0)
+                    if i[0:2] == '弹起' :
+                        bounce = i.split(' ')
+                        win32api.keybd_event(key_code[bounce[1]],0,win32con.KEYEVENTF_KEYUP,0)
+                    if i[0:2] != '延迟' and i[0:2] != '按下' and i[0:2] != '弹起':
+                        win32api.keybd_event(key_code[i],0,0,0)
+                        time.sleep(0.07)
+                        win32api.keybd_event(key_code[i],0,win32con.KEYEVENTF_KEYUP,0)
+            
+            if circulates != -1 and circulates != 0 :
+                if switch_key == 0:
+                    circulates = 0
+                circulates = circulates - 1
+                self.circulate(data,circulates)
+            if circulates == -1 :
+                if switch_key == 0:
+                    circulates = 0
+                self.circulate(data,circulates)
+
         except Exception:
             self.Qlabel_11('数据错误，请检查')
 
     # 组合键
-    def catapult(self,data,direction):
+    def catapult(self,data,direction,Ndirection):
         try:
             instruct = data['宏指令'].split(',')
             for i in instruct :
@@ -1035,14 +1049,18 @@ class Main_Window(QWidget):
                     press = i.split(' ') 
                     if press[1] == '方向' :
                         win32api.keybd_event(key_code[direction],0,0,0)
-                    else :
+                    if press[1] == '反方向' :
+                        win32api.keybd_event(key_code[Ndirection],0,0,0)
+                    if press[1] != '方向' and press[1] != '反方向' :
                         win32api.keybd_event(key_code[press[1]],0,0,0)
 
                 if i[0:2] == '弹起' :
                     bounce = i.split(' ')
                     if bounce[1] == '方向' :
                         win32api.keybd_event(key_code[direction],0,win32con.KEYEVENTF_KEYUP,0)
-                    else :
+                    if bounce[1] == '反方向' :
+                        win32api.keybd_event(key_code[Ndirection],0,win32con.KEYEVENTF_KEYUP,0)
+                    if bounce[1] != '方向' and bounce[1] != '反方向' :
                         win32api.keybd_event(key_code[bounce[1]],0,win32con.KEYEVENTF_KEYUP,0)
 
                 if i[0:2] != '延迟' and i[0:2] != '按下' and i[0:2] != '弹起':
@@ -1054,8 +1072,8 @@ class Main_Window(QWidget):
             self.Qlabel_11('数据错误，请检查')
 
     # 映射键
-    def mappings(self,data,direction,mapping):
-        # try:
+    def mappings(self,data,direction,mapping,Ndirection,Nmapping):
+        try:
             instruct = data['宏指令'].split(',')
             for i in instruct :
 
@@ -1065,22 +1083,30 @@ class Main_Window(QWidget):
 
                 if i[0:2] == '按下' :
                     press = i.split(' ') 
-                    if press[1] == '方向' or press[1] == '映射' :
+                    if press[1] == '方向' or press[1] == '映射' or press[1] == '反方向' or press[1] == '反映射' :
                         if press[1] == '方向' :
                             win32api.keybd_event(key_code[direction],0,0,0)
+                        if press[1] == '反方向' :
+                            win32api.keybd_event(key_code[Ndirection],0,0,0)
                         if press[1] == '映射' :
                             win32api.keybd_event(key_code[mapping],0,0,0)
-                    else :
+                        if press[1] == '反映射' :
+                            win32api.keybd_event(key_code[Nmapping],0,0,0)
+                    if press[1] != '方向' and press[1] != '映射' and press[1] != '反方向' and press[1] != '反映射' : 
                         win32api.keybd_event(key_code[press[1]],0,0,0)
 
                 if i[0:2] == '弹起' :
                     bounce = i.split(' ')
-                    if bounce[1] == '方向' or bounce[1] == '映射' :
+                    if bounce[1] == '方向' or bounce[1] == '映射' or bounce[1] == '反方向' or bounce[1] == '反映射' :
                         if bounce[1] == '方向' :
                             win32api.keybd_event(key_code[direction],0,win32con.KEYEVENTF_KEYUP,0)
+                        if bounce[1] == '反方向' :
+                            win32api.keybd_event(key_code[Ndirection],0,win32con.KEYEVENTF_KEYUP,0)
                         if bounce[1] == '映射' :
                             win32api.keybd_event(key_code[mapping],0,win32con.KEYEVENTF_KEYUP,0)
-                    else :
+                        if bounce[1] == '反映射' :
+                            win32api.keybd_event(key_code[Nmapping],0,win32con.KEYEVENTF_KEYUP,0)
+                    if bounce[1] != '方向' and bounce[1] != '映射' and bounce[1] != '反方向' and bounce[1] != '反映射': 
                         win32api.keybd_event(key_code[bounce[1]],0,win32con.KEYEVENTF_KEYUP,0)
 
                 if i[0:2] != '延迟' and i[0:2] != '按下' and i[0:2] != '弹起':
@@ -1088,14 +1114,14 @@ class Main_Window(QWidget):
                     time.sleep(0.07)
                     win32api.keybd_event(key_code[i],0,win32con.KEYEVENTF_KEYUP,0)
 
-        # except Exception:
-        #     self.Qlabel_11('数据错误，请检查')
+        except Exception:
+            self.Qlabel_11('数据错误，请检查')
 
     # -------------------------------------------------------------------------------------------------------
 
     # 获得按下的键
     def KeyDown(self,event):
-        global key_bool , trigger , left , right
+        global key_bool , trigger , left , right , circulates
         key = str(event.Key)
 
         if switch_key == 1 :
@@ -1118,6 +1144,14 @@ class Main_Window(QWidget):
                             T9 = td.Thread(target=self.advanced_magnificent_key , args=(i,))
                             T9.start()
 
+                    if i['按键类型'] == '循环' :
+                        if key == i['触发键'] :
+                            circulates = int(i['循环次数'])
+                            if circulates != -1 and circulates != 0 and circulates != 1 :
+                                circulates = circulates - 1
+                            T12 = td.Thread(target=self.circulate , args=(i,circulates))
+                            T12.start()
+
                     if i['按键类型'] == '组合键' :
                         if key == i['左方向'] :
                             left = 1
@@ -1131,13 +1165,13 @@ class Main_Window(QWidget):
                                 left = 0
                                 right = 0
                                 trigger = 0
-                                T10 = td.Thread(target=self.catapult , args=(i,i['左方向']))
+                                T10 = td.Thread(target=self.catapult , args=(i,i['左方向'],i['右方向']))
                                 T10.start()
                             if trigger == 1 and right == 1 :
                                 left = 0
                                 right = 0
                                 trigger = 0
-                                T11 = td.Thread(target=self.catapult , args=(i,i['右方向']))
+                                T11 = td.Thread(target=self.catapult , args=(i,i['右方向'],i['左方向']))
                                 T11.start()
 
                     if i['按键类型'] == '映射键' :
@@ -1153,21 +1187,23 @@ class Main_Window(QWidget):
                                 left = 0
                                 right = 0
                                 trigger = 0
-                                T10 = td.Thread(target=self.mappings , args=(i,i['左方向'],i['左映射']))
+                                T10 = td.Thread(target=self.mappings , args=(i,i['左方向'],i['左映射'],i['右方向'],i['右映射']))
                                 T10.start()
                             if trigger == 1 and right == 1 :
                                 left = 0
                                 right = 0
                                 trigger = 0
-                                T11 = td.Thread(target=self.mappings , args=(i,i['右方向'],i['右映射']))
+                                T11 = td.Thread(target=self.mappings , args=(i,i['右方向'],i['右映射'],i['左方向'],i['左映射']))
                                 T11.start()
 
 
                 if '鼠标类型' in i and selective_type == 'mouse':
+
                     if i['鼠标类型'] == '多点点击' :
                         if key == i['触发键'] :
                             T5 = td.Thread(target=self.Multi_Click_mouse , args=(i,))
                             T5.start()
+
                     if i['鼠标类型'] == '滑动' :
                         if key == i['触发键'] :
                             T6 = td.Thread(target=self.slide_mouse , args=(i,))
