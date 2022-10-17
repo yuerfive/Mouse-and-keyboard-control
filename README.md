@@ -12,4 +12,12 @@
 
 b站演示链接:<a href="https://www.bilibili.com/video/BV1VY4y1w7gC">点这里观看</a>
 
+作者:<a href="https://space.bilibili.com/1617626133">进入主页</a>
+
+此软件为免费软件
+
+如有人向您出售此软件，那一定是骗子
+
+Q群：212769521
+
 **声明:本软件仅供学习交流使用。**
