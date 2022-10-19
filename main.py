@@ -8,6 +8,7 @@ from PySide6.QtGui import *
 from PySide6.QtCore import *
 import pyautogui as pa
 import threading as td
+from UI import MainWindow
 
 selective_type = 'key'
 # selective_type = 'mouse'
@@ -145,15 +146,23 @@ key_code = {
 # 创建主窗口
 class Main_Window(QWidget):
 
-    def __init__(self):
+    def __init__(self,parent = None):
 
         # 从文件中加载UI定义
-        super(Main_Window, self).__init__()
-        Main_ui = QFile(r'UI\MainWindow.ui')
-        Main_ui.open(QFile.ReadOnly)
-        Main_ui.close()
-        # 读取UI文件
-        self.ui = QUiLoader().load(Main_ui)
+        super(Main_Window, self).__init__(parent)
+        self.ui = MainWindow.Ui_Form()
+        self.ui.setupUi(self)
+
+        self.setWindowFlag(Qt.FramelessWindowHint)		#将界面设置为无框
+        self.setAttribute(Qt.WA_TranslucentBackground)	#将界面属性设置为半透明
+        self.shadow = QGraphicsDropShadowEffect()		#设定一个阴影,半径为10,颜色为#444444,定位为0,0
+        self.shadow.setBlurRadius(10)
+        self.shadow.setColor(QColor("#444444"))
+        self.shadow.setOffset(0, 0)
+        self.ui.label_13.setGraphicsEffect(self.shadow)	#为frame设定阴影效果
+
+        self.ui.Button4.clicked.connect(self.showMinimized)
+        self.ui.Button5.clicked.connect(self.close)
 
         # 设置文本编辑框为只读
         self.ui.plainTextEdit.setReadOnly(True)
@@ -166,6 +175,13 @@ class Main_Window(QWidget):
         self.ui.lineEdit3.hide()
         # 设置提示标签为隐藏
         self.ui.label_11.hide()
+        # 设置选择退出或最小化托盘隐藏
+        self.ui.label_7.hide()
+        self.ui.radioButton1.hide()
+        self.ui.radioButton2.hide()
+        self.ui.radioButton3.hide()
+        self.ui.Button6.hide()
+        self.ui.Button7.hide()
 
         
         # 加载 启动停止快捷键(前台)
@@ -188,11 +204,6 @@ class Main_Window(QWidget):
         self._tray_icon_menu = None
         self.setup_ui()
 
-        # 默认加载[键盘控制]菜单
-        # t2 = td.Thread(target=self.key_file_name)
-        # t2.start()
-        # t2.join()
-        # self.key_file_name_U()
 
         # 启动键盘监听
         self.KeyHook()
@@ -211,6 +222,22 @@ class Main_Window(QWidget):
 
         # 主菜单事件
         self.ui.listWidget_2.itemClicked.connect(self.pos_Menu)
+
+    def mousePressEvent(self, event):		#鼠标左键按下时获取鼠标坐标,按下右键取消
+        if event.button() == Qt.LeftButton:
+            self.m_flag = True
+            self.m_Position = event.globalPos() - self.pos()
+            event.accept()
+        elif event.button() == Qt.RightButton:
+            self.m_flag = False
+    
+    def mouseMoveEvent(self, QMouseEvent):	#鼠标在按下左键的情况下移动时,根据坐标移动界面
+        if Qt.LeftButton and self.m_flag:
+            self.move(QMouseEvent.globalPos() - self.m_Position)
+            QMouseEvent.accept()
+    
+    def mouseReleaseEvent(self, QMouseEvent):	#鼠标按键释放时,取消移动
+        self.m_flag = False
 
 
 #   --------------------------------------------------控件功能-------------------------------------------------
@@ -512,7 +539,7 @@ class Main_Window(QWidget):
     def create_actions(self):
 
         self._restore_action = QAction("显示主界面")
-        self._restore_action.triggered.connect(self.ui.showNormal)
+        self._restore_action.triggered.connect(self.showNormal)
 
         self._quit_action = QAction("退出")
         self._quit_action.triggered.connect(app.quit)
@@ -536,7 +563,7 @@ class Main_Window(QWidget):
     def iconActivated(self,reason):
         if reason == QSystemTrayIcon.DoubleClick:
             if self._tray_icon.isVisible():
-                self.ui.showNormal()
+                self.showNormal()
             else:
                 self.hide()
 
@@ -817,7 +844,7 @@ class Main_Window(QWidget):
             self.ui.label_9.setText('鼠标位置:')
             try:
                 while True:
-                    ui_show = self.ui.isActiveWindow()
+                    ui_show = self.isActiveWindow()
                     # 获取鼠标位置
                     x, y = pa.position()  
                     self.ui.lineEdit3.setText(str(x)+','+str(y))
@@ -842,7 +869,7 @@ class Main_Window(QWidget):
             self.ui.lineEdit3.setText(key_name)
             try:
                 while True:
-                    ui_show = self.ui.isActiveWindow()
+                    ui_show = self.isActiveWindow()
                     text = self.ui.lineEdit3.text()
                     if text == key_name :
                         pass
@@ -866,7 +893,7 @@ class Main_Window(QWidget):
     def shortcut(self,key):
         global save_fast1 ,save_fast2
         # 检测窗口是否处于前台
-        ui_show = self.ui.isActiveWindow()
+        ui_show = self.isActiveWindow()
         if ui_show == True :
 
             # 删除快捷键
@@ -1256,7 +1283,7 @@ if __name__=='__main__':
     QApplication.setQuitOnLastWindowClosed(False)  # 关闭最后一个窗口不退出程序
 
     Main_Window = Main_Window()
-    Main_Window.ui.show()
+    Main_Window.show()
     sys.exit(app.exec_())
 
 
